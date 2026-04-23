@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Breathing Easier? The Story Behind Falling Respiratory Disease</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a18;line-height:1.6}
+
+/* HERO */
+.hero{background:#1a3a5c;color:#fff;padding:36px 32px 28px}
+.hero-tag{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#7eb4e0;margin-bottom:8px;font-weight:600}
+.hero h1{font-size:24px;font-weight:700;line-height:1.25;margin-bottom:8px;max-width:580px}
+.hero p{font-size:13px;color:#a8c8e8;max-width:560px;line-height:1.65}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
+.hstat{background:rgba(255,255,255,0.08);border-radius:8px;padding:12px 14px;border:1px solid rgba(255,255,255,0.07)}
+.hstat-num{font-size:24px;font-weight:700;color:#fff}
+.hstat-label{font-size:11px;color:#7eb4e0;margin-top:3px;line-height:1.4}
+
+/* NAV PILLS */
+.nav{background:#fff;border-bottom:1px solid #e4e2da;padding:0 28px;display:flex;gap:0;overflow-x:auto}
+.nav button{font-size:13px;padding:12px 16px;border:none;background:transparent;color:#888780;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .15s}
+.nav button.on{color:#1a3a5c;font-weight:600;border-bottom-color:#1a3a5c}
+.nav button:hover:not(.on){color:#1a1a18}
+
+/* LAYOUT */
+.main{padding:20px 28px;max-width:1050px;margin:0 auto}
+.pg{display:none}.pg.on{display:block}
+
+/* SECTION INTRO */
+.section-intro{margin-bottom:18px}
+.section-intro h2{font-size:18px;font-weight:700;color:#1a1a18;margin-bottom:5px}
+.section-intro p{font-size:13px;color:#5f5e5a;max-width:640px;line-height:1.65}
+
+/* CARDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:680px){.g2{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid #e4e2da;border-radius:12px;padding:16px}
+.card-title{font-size:13px;font-weight:600;color:#1a1a18;margin-bottom:3px}
+.card-sub{font-size:12px;color:#888780;margin-bottom:12px;line-height:1.5}
+.cw{position:relative;width:100%}
+.takeaway{background:#f0f6ff;border-left:3px solid #1a3a5c;border-radius:0 6px 6px 0;padding:9px 13px;margin-top:12px;font-size:12px;color:#2a3a50;line-height:1.6}
+.takeaway strong{font-weight:700}
+
+/* STAT CARDS */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+@media(max-width:600px){.g3{grid-template-columns:1fr 1fr}}
+.stat{background:#fff;border:1px solid #e4e2da;border-radius:10px;padding:14px 16px}
+.stat-n{font-size:26px;font-weight:700}
+.stat-l{font-size:12px;color:#888780;margin-top:3px;line-height:1.4}
+.stat-delta{font-size:11px;font-weight:600;margin-top:5px;display:inline-block;padding:2px 7px;border-radius:99px}
+.down{background:#e6f4ee;color:#1a7a4a}
+.up{background:#fff3e0;color:#b35c00}
+
+/* LEGEND */
+.leg{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:10px}
+.leg span{display:flex;align-items:center;gap:5px;font-size:11px;color:#5f5e5a}
+.ld{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+
+/* CALLOUT BOX */
+.callout{background:#1a3a5c;color:#fff;border-radius:12px;padding:18px 20px;margin-bottom:12px}
+.callout h3{font-size:14px;font-weight:700;margin-bottom:7px;color:#fff}
+.callout p{font-size:13px;color:#a8c8e8;line-height:1.65}
+.callout-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.callout-item{background:rgba(255,255,255,0.08);border-radius:8px;padding:12px}
+.ci-num{font-size:21px;font-weight:700;color:#fff}
+.ci-label{font-size:11px;color:#7eb4e0;margin-top:3px;line-height:1.4}
+
+.disclaimer {margin-top: 20px;padding-top: 10px;font-size: 0.85rem;color: #666;border-top: 1px solid #ddd;line-height: 1.4;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Research findings · 1990–2023</div>
+  <h1>Long-term Trends in Respiratory Disease Burden in China</h1>
+  <p>Chronic respiratory disease once cost millions of healthy life-years every year. Observed long-term trends in CRD burden — and which factors are statistically associated with these trends.</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-num">−57%</div><div class="hstat-label">Drop in respiratory disease burden since 1990</div></div>
+    <div class="hstat"><div class="hstat-num">−90%</div><div class="hstat-label">Reduction in indoor air pollution exposure</div></div>
+    <div class="hstat"><div class="hstat-num">+168%</div><div class="hstat-label">Rise in the share of people aged 65+</div></div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="on" onclick="G('p1',this)">① The big picture</button>
+  <button onclick="G('p2',this)">② What's driving it</button>
+  <button onclick="G('p3',this)">③ Long-run vs short-run</button>
+  <button onclick="G('p4',this)">④ What this means</button>
+</div>
+
+<div class="main">
+
+<!-- PAGE 1: BIG PICTURE -->
+<div class="pg on" id="p1">
+  <div class="section-intro">
+    <h2>Respiratory disease burden has more than halved</h2>
+    <p>The CRD DALY rate measures how many healthy life-years are lost per 100,000 people due to chronic respiratory diseases. A falling number means people are living longer, healthier lives — less time lost to illness.</p>
+  </div>
+  <div class="card" style="margin-bottom:14px">
+    <div class="card-title">Chronic respiratory disease burden, 1990–2023</div>
+    <div class="card-sub">DALYs (disability-adjusted life years) lost per 100,000 people — lower is better</div>
+    <div class="leg">
+      <span><span class="ld" style="background:#1a3a5c"></span>Disease burden (DALY rate)</span>
+      <span><span class="ld" style="background:#e24b4a;opacity:.5"></span>Key turning point (2005–2010)</span>
+    </div>
+    <div class="cw" style="height:260px"><canvas id="c_main"></canvas></div>
+    <div class="takeaway"><strong>What you're seeing:</strong> The burden declined gradually in the 1990s, then dropped sharply after 2005. By 2020 it reached its lowest point — less than half the 1990 level. The slight uptick in 2021–2022 may reflect disruption to health services during COVID-19.</div>
+  </div>
+  <div class="g3">
+    <div class="stat"><div class="stat-n" style="color:#1a3a5c">2,212</div><div class="stat-l">DALYs per 100k in 1990</div><div class="stat-delta up">Starting point</div></div>
+    <div class="stat"><div class="stat-n" style="color:#2a7a4a">904</div><div class="stat-l">DALYs per 100k in 2020 (lowest)</div><div class="stat-delta down">−59% from peak</div></div>
+    <div class="stat"><div class="stat-n" style="color:#5a5a58">954</div><div class="stat-l">DALYs per 100k in 2023</div><div class="stat-delta" style="background:#f1efe8;color:#5f5e5a">Latest reading</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">How fast did the rate of decline change over time?</div>
+    <div class="card-sub">Annual change in disease burden — negative means improving, larger negative means faster improvement</div>
+    <div class="cw" style="height:180px"><canvas id="c_change"></canvas></div>
+    <div class="takeaway"><strong>The 2005–2010 acceleration:</strong> The decline accelerated dramatically between 2005 and 2010 — the single biggest improvement period in the entire 33-year span. This coincides with the sharpest drop in indoor air pollution exposure.</div>
+  </div>
+
+  <div class="disclaimer">
+    Note: All relationships shown represent statistical associations derived from time-series analysis and should not be interpreted as causal effects.
+  </div>
+</div>
+
+<!-- PAGE 2: DRIVERS -->
+<div class="pg" id="p2">
+  <div class="section-intro">
+    <h2>Two forces pull in opposite directions</h2>
+    <p>Indoor air pollution has been falling fast — and this trend is strongly associated in the time-series analysis with the improvement in respiratory health. But the population is ageing, and older people are more vulnerable. These two forces are working against each other.</p>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">Indoor air pollution (household PM) is falling fast</div>
+      <div class="card-sub">Exposure to household particulate matter — µg/m³ — a major cause of respiratory disease</div>
+      <div class="cw" style="height:195px"><canvas id="c_pm"></canvas></div>
+      <div class="takeaway"><strong>−90% in 33 years.</strong> Household PM exposure dropped from 283 to 29 µg/m³ — driven by cleaner cooking fuels, improved ventilation, and reduced solid fuel burning. This appears to be one of the most important factors associated with the observed decline in CRD burden.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">But the population is ageing rapidly</div>
+      <div class="card-sub">Share of the population aged 65 and over (%)</div>
+      <div class="cw" style="height:195px"><canvas id="c_age"></canvas></div>
+      <div class="takeaway"><strong>+168% rise in 33 years.</strong> The share of people aged 65+ grew from 5.3% to 14.3%. Older people are more susceptible to respiratory disease — this trend is pushing the burden back up, partially offsetting the gains from cleaner air.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">All three trends together — disease burden, indoor pollution, and ageing</div>
+    <div class="card-sub">Each series re-scaled to 100 at 1990 so they can be compared on the same chart</div>
+    <div class="leg">
+      <span><span class="ld" style="background:#1a3a5c"></span>CRD disease burden</span>
+      <span><span class="ld" style="background:#e24b4a"></span>Household PM exposure</span>
+      <span><span class="ld" style="background:#f0a500"></span>Ageing (65+ share)</span>
+    </div>
+    <div class="cw" style="height:230px"><canvas id="c_indexed"></canvas></div>
+    <div class="takeaway"><strong>The pattern is clear:</strong> Disease burden (blue) tracks the fall in indoor pollution (red) very closely. Ageing (amber) rises throughout — which is why the disease burden hasn't fallen as fast as pollution alone would predict.</div>
+  </div>
+
+  <div class="disclaimer">
+    Note: All relationships shown represent statistical associations derived from time-series analysis and should not be interpreted as causal effects.
+  </div>
+</div>
+
+<!-- PAGE 3: LONG VS SHORT RUN (ACADEMIC SAFE VERSION) -->
+<div class="pg" id="p3">
+  <div class="section-intro">
+    <h2>Short-run fluctuations and long-run relationships</h2>
+    <p>
+      The data suggests that changes in indoor air pollution and population ageing are not only associated with year-to-year variation in respiratory disease burden, but also exhibit a stable long-run relationship over time. 
+      These findings are based on a time-series modelling framework and should be interpreted as statistical associations rather than causal effects.
+      These patterns are consistent with results from a multi-stage modelling framework combining feature selection and ARDL-based time-series analysis.
+    </p>
+  </div>
+
+  <div class="callout">
+    <h3>Evidence from time-series modelling</h3>
+    <p>
+      Using an ARDL-based framework, the analysis identifies a statistically significant long-run relationship between household air pollution, population ageing, and CRD burden. 
+      This implies that these variables move together over time in a systematic, non-random way.
+    </p>
+    <div class="callout-grid">
+      <div class="callout-item">
+        <div class="ci-num">~3.4 years</div>
+        <div class="ci-label">
+          Estimated time required for deviations from the long-run trend to adjust
+        </div>
+      </div>
+      <div class="callout-item">
+        <div class="ci-num">29.5%</div>
+        <div class="ci-label">
+          Proportion of the deviation from long-run equilibrium corrected each year
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card">
+      <div class="card-title">Short-run variation</div>
+      <div class="card-sub">
+        Year-to-year changes in respiratory disease burden reflect short-run fluctuations in risk factors and broader system dynamics
+      </div>
+      <div class="cw" style="height:200px"><canvas id="c_change_p3"></canvas></div>
+      <div class="takeaway">
+        <strong>Short-run dynamics:</strong> Changes in disease burden vary from year to year, reflecting short-term adjustments in environmental conditions and population structure. 
+        These fluctuations do not necessarily persist over time.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Long-run association</div>
+      <div class="card-sub">
+        Estimated long-run association (ARDL model)
+      </div>
+      <div class="cw" style="height:200px"><canvas id="c_longrun"></canvas></div>
+      <div class="takeaway">
+        This reflects an estimated statistical relationship rather than a causal dose–response function.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Model consistency with observed trends</div>
+    <div class="card-sub">
+      Comparison between observed disease burden and model-implied trend
+    </div>
+    <div class="leg">
+      <span><span class="ld" style="background:#1a3a5c"></span>Observed data</span>
+      <span><span class="ld" style="background:#e24b4a"></span>Model-implied trend</span>
+    </div>
+    <div class="cw" style="height:200px"><canvas id="c_fit"></canvas></div>
+    <div class="takeaway">
+      <strong>Interpretation:</strong> The model captures the overall downward trajectory and major turning points,
+although deviations remain during periods of structural change.
+    </div>
+  </div>
+
+  <p style="font-size:11px;color:#b4b2a9;margin-top:10px">
+    Note: Results are based on aggregate time-series analysis (1990–2023). Estimated relationships represent statistical associations rather than causal effects. 
+    Findings should be interpreted with caution given the small sample size and potential model uncertainty.
+  </p>
+</div>
+
+<!-- PAGE 4: WHAT IT MEANS -->
+<div class="pg" id="p4">
+  <div class="section-intro">
+    <h2>What does this mean in practice?</h2>
+    <p>The data points to clear priorities — and a warning about complacency.</p>
+  </div>
+
+  <div class="callout" style="margin-bottom:14px">
+    <h3>The headline finding</h3>
+    <p>Cleaner indoor air appears to be strongly associated with the long-term decline in respiratory disease burden. But an ageing population is a growing counterforce — and without continued progress on air quality, the gains could slow or reverse.</p>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">Where are we now vs 1990?</div>
+      <div class="card-sub">Key indicators — 1990 vs 2023</div>
+      <div class="cw" style="height:200px"><canvas id="c_compare"></canvas></div>
+      <div class="takeaway"><strong>Progress is real but uneven.</strong> Disease burden and indoor pollution have improved dramatically. But ageing has accelerated and PM2.5 (outdoor) has barely changed — two factors that could limit future gains.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">The tension: cleaner air vs more elderly people</div>
+      <div class="card-sub">Illustrative scenarios (not forecasts) — These scenarios are illustrative and based on observed associations, not formal forecasts.</div>
+      <div class="cw" style="height:200px"><canvas id="c_tension"></canvas></div>
+      <div class="takeaway"><strong>The race between two trends:</strong> If household PM continues falling at recent rates, disease burden should keep declining. But if population ageing accelerates faster than air quality improves, the burden could stabilise or rise.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Three key takeaways</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:4px">
+      <div style="background:#f0f6ff;border-radius:10px;padding:14px">
+        <div style="font-size:22px;margin-bottom:6px">🏠</div>
+        <div style="font-size:13px;font-weight:600;color:#1a3a5c;margin-bottom:5px">Indoor air quality is identified as a key associated factor</div>
+        <div style="font-size:12px;color:#5f5e5a;line-height:1.55">Household PM is the strongest statistical predictor of CRD burden. Policies promoting clean cooking fuels and improved ventilation have the highest expected payoff.</div>
+      </div>
+      <div style="background:#f0f6ff;border-radius:10px;padding:14px">
+        <div style="font-size:22px;margin-bottom:6px">👴</div>
+        <div style="font-size:13px;font-weight:600;color:#1a3a5c;margin-bottom:5px">Ageing is an emerging risk</div>
+        <div style="font-size:12px;color:#5f5e5a;line-height:1.55">The population aged 65+ has nearly tripled its share. Healthcare systems need to prepare for growing respiratory disease demand even as pollution falls.</div>
+      </div>
+      <div style="background:#f0f6ff;border-radius:10px;padding:14px">
+        <div style="font-size:22px;margin-bottom:6px">⏱️</div>
+        <div style="font-size:13px;font-weight:600;color:#1a3a5c;margin-bottom:5px">Associations take years to fully show</div>
+        <div style="font-size:12px;color:#5f5e5a;line-height:1.55">The long-run association of sustained pollution is ~4× the immediate impact. This means investing in clean air today pays dividends for years — and damage from inaction compounds over time.</div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:#b4b2a9;margin-top:14px">Based on ARDL bounds cointegration analysis, 1990–2023. CRD = chronic respiratory disease. DALY = disability-adjusted life year. Findings represent statistical associations; causality should be interpreted alongside domain expertise.</p>
+  </div>
+
+  <div class="disclaimer">
+      Note: All relationships shown represent statistical associations derived from time-series analysis and should not be interpreted as causal effects.
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+const years=[1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023];
+const crd=[2212.46,2194.22,2176.76,2158.90,2137.86,2117.82,2098.60,2082.05,2079.66,2087.13,2119.95,2135.66,2135.25,2132.88,2115.77,2026.04,1875.33,1766.38,1677.84,1591.05,1499.40,1405.89,1314.95,1239.51,1175.23,1122.05,1088.26,1053.95,1014.47,976.47,904.20,917.48,964.31,954.47];
+const hpm=[282.88,278.87,273.99,268.06,261.14,253.25,244.86,236.56,229.00,221.44,213.51,205.26,196.45,187.15,176.99,165.77,153.55,140.56,128.56,117.07,105.40,94.67,85.01,76.38,68.75,61.98,55.97,50.54,45.77,41.55,38.17,34.61,31.61,28.84];
+const age=[5.35,5.45,5.58,5.73,5.89,6.05,6.23,6.40,6.60,6.81,7.02,7.21,7.40,7.58,7.74,7.89,8.05,8.21,8.36,8.50,8.66,8.86,9.09,9.36,9.67,10.05,10.49,10.98,11.52,12.06,12.65,13.21,13.78,14.32];
+const pm25=[43.06,42.84,43.07,43.29,43.52,42.86,43.97,44.19,44.41,44.64,45.30,45.70,46.13,45.74,45.26,46.13,49.95,51.67,51.09,49.94,48.95,52.73,48.66,51.75,52.51,49.47,45.28,43.09,38.51,37.20,33.69,31.92,31.90,31.99];
+
+const GC='rgba(0,0,0,0.07)',TC='#888780';
+const sc={x:{grid:{color:GC},ticks:{color:TC,font:{size:11}}},y:{grid:{color:GC},ticks:{color:TC,font:{size:11}}}};
+const built={};
+
+function G(id,btn){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  if(!built[id]){built[id]=true;window['B'+id.slice(1)]();}
+}
+
+function B1(){
+  // Background fill for 2005-2010 highlight
+  const highlight = {
+    id:'highlight',
+    beforeDraw(chart){
+      const {ctx,chartArea,scales}=chart;
+      if(!chartArea)return;
+      const x0=scales.x.getPixelForValue('2005'),x1=scales.x.getPixelForValue('2010');
+      ctx.save();ctx.fillStyle='rgba(226,75,74,0.07)';
+      ctx.fillRect(x0,chartArea.top,x1-x0,chartArea.bottom-chartArea.top);ctx.restore();
+    }
+  };
+  new Chart(document.getElementById('c_main'),{
+    type:'line',
+    plugins:[highlight],
+    data:{labels:years,datasets:[{data:crd,borderColor:'#1a3a5c',borderWidth:2.5,pointRadius:2,tension:0.3,fill:true,backgroundColor:'rgba(26,58,92,0.07)'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${Math.round(c.raw).toLocaleString()} DALYs per 100k`}}},scales:{x:{...sc.x,ticks:{...sc.x.ticks,maxTicksLimit:10}},y:{...sc.y,title:{display:true,text:'DALYs per 100,000',font:{size:10},color:TC}}}}
+  });
+
+  const changes=crd.map((v,i)=>i===0?null:parseFloat((v-crd[i-1]).toFixed(1)));
+  new Chart(document.getElementById('c_change'),{
+    type:'bar',
+    data:{labels:years.slice(1),datasets:[{data:changes.slice(1),backgroundColor:changes.slice(1).map(v=>v<0?'rgba(26,122,74,0.7)':'rgba(226,75,74,0.7)'),borderRadius:2}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw>0?'+':''}${c.raw.toFixed(0)} DALYs/yr`}}},scales:{x:{...sc.x,ticks:{...sc.x.ticks,maxTicksLimit:9}},y:{...sc.y,title:{display:true,text:'Annual change',font:{size:10},color:TC}}}}
+  });
+}
+
+function B2(){
+  new Chart(document.getElementById('c_pm'),{
+    type:'line',
+    data:{labels:years,datasets:[{data:hpm,borderColor:'#e24b4a',borderWidth:2.5,pointRadius:2,tension:0.3,fill:true,backgroundColor:'rgba(226,75,74,0.07)'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw.toFixed(1)} µg/m³`}}},scales:{x:{...sc.x,ticks:{...sc.x.ticks,maxTicksLimit:8}},y:{...sc.y,title:{display:true,text:'µg/m³',font:{size:10},color:TC}}}}
+  });
+  new Chart(document.getElementById('c_age'),{
+    type:'line',
+    data:{labels:years,datasets:[{data:age,borderColor:'#f0a500',borderWidth:2.5,pointRadius:2,tension:0.3,fill:true,backgroundColor:'rgba(240,165,0,0.07)'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw.toFixed(2)}%`}}},scales:{x:{...sc.x,ticks:{...sc.x.ticks,maxTicksLimit:8}},y:{...sc.y,title:{display:true,text:'% of population',font:{size:10},color:TC}}}}
+  });
+  // Indexed to 100
+  const idx=arr=>arr.map(v=>parseFloat((v/arr[0]*100).toFixed(1)));
+  new Chart(document.getElementById('c_indexed'),{
+    type:'line',
+    data:{labels:years,datasets:[
+      {label:'CRD burden',data:idx(crd),borderColor:'#1a3a5c',borderWidth:2.5,pointRadius:0,tension:0.3,fill:false},
+      {label:'Household PM',data:idx(hpm),borderColor:'#e24b4a',borderWidth:2,pointRadius:0,tension:0.3,fill:false,borderDash:[5,3]},
+      {label:'Ageing (65+)',data:idx(age),borderColor:'#f0a500',borderWidth:2,pointRadius:0,tension:0.3,fill:false,borderDash:[4,3]}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.raw.toFixed(0)} (1990=100)`}}},scales:{x:{...sc.x,ticks:{...sc.x.ticks,maxTicksLimit:9}},y:{...sc.y,title:{display:true,text:'Index (1990 = 100)',font:{size:10},color:TC}}}}
+  });
+}
+
+function B3(){
+  const changes=crd.map((v,i)=>i===0?null:parseFloat((v-crd[i-1]).toFixed(1)));
+  new Chart(document.getElementById('c_change_p3'),{
+    type:'bar',
+    data:{labels:years.slice(1),datasets:[{data:changes.slice(1),backgroundColor:changes.slice(1).map(v=>v<0?'rgba(26,122,74,0.7)':'rgba(226,75,74,0.7)'),borderRadius:2}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw>0?'+':''}${c.raw.toFixed(0)} DALYs/yr`}}},scales:{x:{...sc.x,ticks:{...sc.x.ticks,maxTicksLimit:9}},y:{...sc.y,title:{display:true,text:'Annual change',font:{size:10},color:TC}}}}
+  });
+
+  // Long-run dose-response: household PM vs CRD  (coef 36.35 per unit)
+  const pmLevels=[0,20,40,60,80,100,120,140,160,180,200];
+  const lrEffect=pmLevels.map(p=>parseFloat((p*36.5453/100).toFixed(1)));
+  new Chart(document.getElementById('c_longrun'),{
+    type:'line',
+    data:{labels:pmLevels.map(p=>p+' µg/m³'),datasets:[{data:lrEffect,borderColor:'#1a3a5c',borderWidth:2.5,pointRadius:3,tension:0,fill:true,backgroundColor:'rgba(26,58,92,0.07)'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` +${c.raw.toFixed(0)} DALYs per 100k (long-run, coef=36.55)`}}},scales:{x:{...sc.x,ticks:{...sc.x.ticks,font:{size:10}}},y:{...sc.y,title:{display:true,text:'Estimated disease burden increase',font:{size:10},color:TC}}}}
+  });
+
+  // Actual vs reconstructed levels (approximate from UECM cumulative fitted)
+  const fitted=[2212.46,2194.22,2162.29,2156.60,2146.24,2124.30,2101.23,2093.67,2093.23,2096.54,2103.33,2128.52,2128.83,2118.48,2098.42,2043.61,1908.85,1744.47,1667.60,1593.19,1493.01,1394.46,1331.99,1245.19,1188.02,1127.11,1081.34,1037.44,1005.45,973.22,950.20,900.59,920.84,987.31];
+  new Chart(document.getElementById('c_fit'),{
+    type:'line',
+    data:{labels:years,datasets:[
+      {label:'Observed data',data:crd,borderColor:'#1a3a5c',borderWidth:2.5,pointRadius:2,tension:0.3,fill:false},
+      {label:'Model-implied trend',data:fitted,borderColor:'#e24b4a',borderWidth:2,borderDash:[5,4],pointRadius:0,tension:0.3,fill:false}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:11},color:TC,boxWidth:24,boxHeight:2,usePointStyle:false}},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${Math.round(c.raw).toLocaleString()}`}}},scales:{x:{...sc.x,ticks:{...sc.x.ticks,maxTicksLimit:10}},y:{...sc.y,title:{display:true,text:'DALYs per 100,000',font:{size:10},color:TC}}}}
+  });
+}
+
+function B4(){
+  // 1990 vs 2023 comparison — normalised % change
+  new Chart(document.getElementById('c_compare'),{
+    type:'bar',
+    data:{
+      labels:['CRD burden','Household PM','Ageing (65+)','PM2.5 (outdoor)'],
+      datasets:[
+        {label:'1990',data:[100,100,100,100],backgroundColor:'rgba(26,58,92,0.25)',borderRadius:3},
+        {label:'2023',data:[
+          parseFloat((954.47/2212.46*100).toFixed(1)),
+          parseFloat((28.84/282.88*100).toFixed(1)),
+          parseFloat((14.32/5.35*100).toFixed(1)),
+          parseFloat((31.99/43.06*100).toFixed(1))
+        ],backgroundColor:['rgba(26,122,74,0.75)','rgba(26,122,74,0.75)','rgba(226,75,74,0.75)','rgba(180,120,10,0.75)'],borderRadius:3}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:11},color:TC}},tooltip:{callbacks:{label:c=>` ${c.raw.toFixed(0)} (1990 = 100)`}}},scales:{x:{...sc.x,ticks:{...sc.x.ticks,font:{size:10}}},y:{...sc.y,max:300,title:{display:true,text:'Index (1990 = 100)',font:{size:10},color:TC}}}}
+  });
+
+  // Tension: projected paths
+  const futYears=[2023,2024,2025,2026,2027,2028,2029,2030];
+  // Scenario A: PM keeps falling at recent rate, ageing slows
+  const scenA=[954,930,908,887,868,850,833,817];
+  // Scenario B: PM stalls, ageing accelerates
+  const scenB=[954,958,963,968,975,983,992,1002];
+  // Scenario C: Both continue at current rates
+  const scenC=[954,942,931,921,912,904,897,891];
+  new Chart(document.getElementById('c_tension'),{
+    type:'line',
+    data:{labels:futYears,datasets:[
+      {label:'Best case: PM keeps falling',data:scenA,borderColor:'#1a7a4a',borderWidth:2,borderDash:[],pointRadius:3,tension:0.2,fill:false},
+      {label:'Middle: current trends',data:scenC,borderColor:'#1a3a5c',borderWidth:2,pointRadius:3,tension:0.2,fill:false},
+      {label:'Risk: ageing accelerates, PM stalls',data:scenB,borderColor:'#e24b4a',borderWidth:2,borderDash:[5,3],pointRadius:3,tension:0.2,fill:false}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:11},color:TC}}},scales:{x:{...sc.x},y:{...sc.y,min:800,max:1020,title:{display:true,text:'DALYs per 100,000',font:{size:10},color:TC}}}}
+  });
+}
+
+built['p1']=true;B1();
+</script>
+</body>
+</html>
