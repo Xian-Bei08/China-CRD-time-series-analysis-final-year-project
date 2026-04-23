@@ -1,0 +1,4 @@
+step,action,variable,vif,n_remaining_before_action,remaining_variables
+0,remove,d_household_pm_lag2,40.01574431489875,10,"d_pm25_lag0, d_pm25_lag1, d_pm25_lag2, d_gov_health_exp_pct_gdp_lag0, d_gov_health_exp_pct_gdp_lag1, d_gov_health_exp_pct_gdp_lag2, d_household_pm_lag1, d_household_pm_lag2, d_ageing_65_plus_lag1, trend"
+1,remove,d_ageing_65_plus_lag1,20.96401333849683,9,"d_pm25_lag0, d_pm25_lag1, d_pm25_lag2, d_gov_health_exp_pct_gdp_lag0, d_gov_health_exp_pct_gdp_lag1, d_gov_health_exp_pct_gdp_lag2, d_household_pm_lag1, d_ageing_65_plus_lag1, trend"
+2,check,d_household_pm_lag1,3.499396718818797,8,"d_pm25_lag0, d_pm25_lag1, d_pm25_lag2, d_gov_health_exp_pct_gdp_lag0, d_gov_health_exp_pct_gdp_lag1, d_gov_health_exp_pct_gdp_lag2, d_household_pm_lag1, trend"

@@ -1,0 +1,8 @@
+step,removed_variable,max_p_value,aic,bic,remaining_variables
+0,d_pm25_lag1,0.9501585956224684,269.96027295699287,284.6145225689201,d_pm25_lag0 | d_pm25_lag1 | d_pm25_lag2 | d_gov_health_exp_pct_gdp_lag0 | d_gov_health_exp_pct_gdp_lag1 | d_gov_health_exp_pct_gdp_lag2 | d_household_pm_lag1 | d_household_pm_lag2 | d_ageing_65_plus_lag1 | trend
+1,d_gov_health_exp_pct_gdp_lag0,0.7695904075274469,267.966900320299,281.28894542205103,d_pm25_lag0 | d_pm25_lag2 | d_gov_health_exp_pct_gdp_lag0 | d_gov_health_exp_pct_gdp_lag1 | d_gov_health_exp_pct_gdp_lag2 | d_household_pm_lag1 | d_household_pm_lag2 | d_ageing_65_plus_lag1 | trend
+2,d_gov_health_exp_pct_gdp_lag1,0.7089472195482907,266.10411750475384,278.09395809633065,d_pm25_lag0 | d_pm25_lag2 | d_gov_health_exp_pct_gdp_lag1 | d_gov_health_exp_pct_gdp_lag2 | d_household_pm_lag1 | d_household_pm_lag2 | d_ageing_65_plus_lag1 | trend
+3,d_pm25_lag0,0.270865102055684,264.31491608362967,274.9725521650313,d_pm25_lag0 | d_pm25_lag2 | d_gov_health_exp_pct_gdp_lag2 | d_household_pm_lag1 | d_household_pm_lag2 | d_ageing_65_plus_lag1 | trend
+4,d_pm25_lag2,0.18126604344971547,264.0549397567213,273.3803713279477,d_pm25_lag2 | d_gov_health_exp_pct_gdp_lag2 | d_household_pm_lag1 | d_household_pm_lag2 | d_ageing_65_plus_lag1 | trend
+5,d_gov_health_exp_pct_gdp_lag2,0.25080102054217407,264.4948554780749,272.48808253912614,d_gov_health_exp_pct_gdp_lag2 | d_household_pm_lag1 | d_household_pm_lag2 | d_ageing_65_plus_lag1 | trend
+6,,0.03669443489009761,264.211742117378,270.872764668254,d_household_pm_lag1 | d_household_pm_lag2 | d_ageing_65_plus_lag1 | trend

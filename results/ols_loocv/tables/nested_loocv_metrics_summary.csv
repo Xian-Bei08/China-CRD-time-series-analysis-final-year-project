@@ -1,0 +1,2 @@
+model,n_forecasts,mean_error,mae,rmse,mape_percent,directional_accuracy_percent,selection_metric,mean_n_selected,most_frequent_outer_path
+nested_best_path,28,-4.502408456914863,25.533329060645478,30.567856058341434,449.87472996104816,78.57142857142857,mae,5.0,random_forest

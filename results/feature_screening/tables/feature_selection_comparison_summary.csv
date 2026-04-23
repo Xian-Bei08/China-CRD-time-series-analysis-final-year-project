@@ -1,0 +1,5 @@
+path,selected_variables,n_selected,screening_metric,notes
+elastic_net,d_pm25_lag0 | d_pm25_lag1 | d_pm25_lag2 | d_gov_health_exp_pct_gdp_lag0 | d_gov_health_exp_pct_gdp_lag1 | d_gov_health_exp_pct_gdp_lag2 | d_household_pm_lag1 | d_household_pm_lag2 | d_ageing_65_plus_lag1 | trend,10,410.69364491702106,"best alpha=0.001, best l1_ratio=1.0"
+backward_elimination,d_household_pm_lag1 | d_household_pm_lag2 | d_ageing_65_plus_lag1 | trend,4,270.872764668254,p-threshold=0.1
+random_forest,d_household_pm_lag2 | trend | d_household_pm_lag1 | d_ageing_65_plus_lag1 | d_pm25_lag0,5,1.0,selected features with above-median importance
+vif_filtering,d_pm25_lag0 | d_pm25_lag1 | d_pm25_lag2 | d_gov_health_exp_pct_gdp_lag0 | d_gov_health_exp_pct_gdp_lag1 | d_gov_health_exp_pct_gdp_lag2 | d_household_pm_lag1 | trend,8,,iterative VIF filtering with threshold=10.0

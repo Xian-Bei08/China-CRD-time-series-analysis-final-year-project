@@ -1,0 +1,11 @@
+path,variable,selected_in_folds,selection_rate
+nested_best_path,d_household_pm_lag1,28,1.0
+nested_best_path,d_household_pm_lag2,28,1.0
+nested_best_path,trend,28,1.0
+nested_best_path,d_ageing_65_plus_lag1,23,0.8214285714285714
+nested_best_path,d_pm25_lag0,22,0.7857142857142857
+nested_best_path,d_gov_health_exp_pct_gdp_lag0,3,0.10714285714285714
+nested_best_path,d_pm25_lag1,3,0.10714285714285714
+nested_best_path,d_gov_health_exp_pct_gdp_lag2,2,0.07142857142857142
+nested_best_path,d_pm25_lag2,2,0.07142857142857142
+nested_best_path,d_gov_health_exp_pct_gdp_lag1,1,0.03571428571428571

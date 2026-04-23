@@ -1,0 +1,29 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:        d_crd_daly_rate   R-squared:                       0.728
+Model:                            OLS   Adj. R-squared:                  0.666
+Method:                 Least Squares   F-statistic:                     11.78
+Date:                Thu, 23 Apr 2026   Prob (F-statistic):           1.27e-05
+Time:                        03:37:43   Log-Likelihood:                -126.95
+No. Observations:                  28   AIC:                             265.9
+Df Residuals:                      22   BIC:                             273.9
+Df Model:                           5                                         
+Covariance Type:            nonrobust                                         
+=========================================================================================
+                            coef    std err          t      P>|t|      [0.025      0.975]
+-----------------------------------------------------------------------------------------
+const                     6.0617     52.797      0.115      0.910    -103.434     115.557
+d_household_pm_lag2     -28.8354      9.729     -2.964      0.007     -49.012      -8.659
+trend                    -8.4897      2.180     -3.894      0.001     -13.012      -3.968
+d_household_pm_lag1      26.9974      9.443      2.859      0.009       7.415      46.580
+d_ageing_65_plus_lag1   344.0749    164.569      2.091      0.048       2.781     685.369
+d_pm25_lag0              -1.4504      2.938     -0.494      0.626      -7.543       4.642
+==============================================================================
+Omnibus:                        0.518   Durbin-Watson:                   1.016
+Prob(Omnibus):                  0.772   Jarque-Bera (JB):                0.520
+Skew:                           0.285   Prob(JB):                        0.771
+Kurtosis:                       2.653   Cond. No.                         800.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.

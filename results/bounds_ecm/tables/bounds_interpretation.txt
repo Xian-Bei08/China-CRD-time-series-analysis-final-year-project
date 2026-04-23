@@ -1,0 +1,5 @@
+Bounds test case: 3
+F-statistic: 3.969321
+5% lower bound: 2.636972
+5% upper bound: 3.791404
+Interpretation: Evidence supports a long-run level relationship at the 5% level.
