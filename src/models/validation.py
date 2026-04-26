@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
-from statsmodels.tsa.ardl import ardl_select_order
 
 from src.models.feature_selection import (
     backward_elimination,
@@ -28,96 +27,6 @@ def prepare_validation_data(df: pd.DataFrame, y_col: str, x_cols: list[str], yea
     for col in [y_col] + x_cols:
         model_df[col] = pd.to_numeric(model_df[col], errors="coerce")
     return model_df.dropna(subset=[y_col] + x_cols).reset_index(drop=True)
-
-
-def fixed_holdout_validation_ols(
-    train_df: pd.DataFrame,
-    test_df: pd.DataFrame,
-    y_col: str,
-    x_cols: list[str],
-    year_col: str = "year",
-) -> pd.DataFrame:
-    train_model_df = prepare_validation_data(train_df, y_col=y_col, x_cols=x_cols, year_col=year_col)
-    test_model_df = prepare_validation_data(test_df, y_col=y_col, x_cols=x_cols, year_col=year_col)
-
-    X_train = sm.add_constant(train_model_df[x_cols], has_constant="add")
-    y_train = train_model_df[y_col]
-    X_test = sm.add_constant(test_model_df[x_cols], has_constant="add")
-
-    fitted_model = sm.OLS(y_train, X_train).fit()
-    predictions = fitted_model.predict(X_test)
-
-    out = test_model_df[[year_col, y_col]].copy()
-    out["predicted"] = predictions.values
-    out["error"] = out[y_col] - out["predicted"]
-    out["abs_error"] = out["error"].abs()
-    out["squared_error"] = out["error"] ** 2
-    out["ape"] = np.where(out[y_col] != 0, out["abs_error"] / out[y_col].abs() * 100, np.nan)
-    out["train_start_year"] = int(train_model_df[year_col].min())
-    out["train_end_year"] = int(train_model_df[year_col].max())
-    out["train_size"] = len(train_model_df)
-    out = out.rename(columns={y_col: "actual"})
-    return out.reset_index(drop=True)
-
-
-def fixed_holdout_validation_ardl(
-    train_df: pd.DataFrame,
-    test_df: pd.DataFrame,
-    y_col: str,
-    x_cols: list[str],
-    year_col: str = "year",
-    maxlag: int = 1,
-    maxorder: int | dict[str, int] = 1,
-    ic: str = "bic",
-    trend: str = "c",
-    causal: bool = False,
-) -> pd.DataFrame:
-    train_model_df = prepare_validation_data(train_df, y_col=y_col, x_cols=x_cols, year_col=year_col)
-    test_model_df = prepare_validation_data(test_df, y_col=y_col, x_cols=x_cols, year_col=year_col)
-
-    hold_back = maxlag
-    if isinstance(maxorder, int):
-        hold_back = max(hold_back, maxorder)
-    elif isinstance(maxorder, dict):
-        hold_back = max(hold_back, max(maxorder.values()))
-
-    selector = ardl_select_order(
-        endog=train_model_df[y_col],
-        maxlag=maxlag,
-        exog=train_model_df[x_cols],
-        maxorder=maxorder,
-        ic=ic,
-        trend=trend,
-        causal=causal,
-        hold_back=hold_back,
-        missing="drop",
-    )
-    fitted_model = selector.model.fit()
-
-    rows = []
-    for i in range(len(test_model_df)):
-        current_x = test_model_df.iloc[[i]][x_cols]
-        pred = float(fitted_model.forecast(steps=1, exog=current_x).iloc[0])
-        actual = float(test_model_df.iloc[i][y_col])
-        year = int(test_model_df.iloc[i][year_col])
-
-        rows.append({
-            "year": year,
-            "selected_ar_lags": str(selector.model.ar_lags),
-            "selected_dl_lags": str(selector.model.dl_lags),
-            "actual": actual,
-            "predicted": pred,
-            "error": actual - pred,
-            "abs_error": abs(actual - pred),
-            "squared_error": (actual - pred) ** 2,
-            "ape": abs((actual - pred) / actual) * 100 if actual != 0 else np.nan,
-            "train_start_year": int(train_model_df[year_col].min()),
-            "train_end_year": int(train_model_df[year_col].max()),
-            "train_size": len(train_model_df),
-        })
-
-    return pd.DataFrame(rows)
-
 
 def _select_features_for_path(
     train_df: pd.DataFrame,
@@ -281,67 +190,6 @@ def selection_frequency_table(detail_df: pd.DataFrame, path_name: str) -> pd.Dat
     if out.empty:
         return pd.DataFrame(columns=["path", "variable", "selected_in_folds", "selection_rate"])
     return out.sort_values(["selected_in_folds", "variable"], ascending=[False, True]).reset_index(drop=True)
-
-
-def compare_nested_loocv_paths(
-    df: pd.DataFrame,
-    y_col: str,
-    candidate_cols: list[str],
-    path_names: list[str],
-    year_col: str = "year",
-    *,
-    alpha_grid: list[float],
-    l1_grid: list[float],
-    inner_cv_splits: int,
-    random_state: int,
-    backward_pvalue_threshold: float,
-    random_forest_n_estimators: int,
-    vif_threshold: float,
-) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    detail_frames = []
-    metric_frames = []
-    freq_frames = []
-
-    for path_name in path_names:
-        path_df = nested_loocv_single_path(
-            df=df,
-            y_col=y_col,
-            candidate_cols=candidate_cols,
-            path_name=path_name,
-            year_col=year_col,
-            alpha_grid=alpha_grid,
-            l1_grid=l1_grid,
-            inner_cv_splits=inner_cv_splits,
-            random_state=random_state,
-            backward_pvalue_threshold=backward_pvalue_threshold,
-            random_forest_n_estimators=random_forest_n_estimators,
-            vif_threshold=vif_threshold,
-        )
-        detail_frames.append(path_df)
-        metric_df = metrics_table(path_df, model_name=path_name)
-        metric_df["mean_n_selected"] = float(path_df["n_selected"].mean())
-        metric_frames.append(metric_df)
-        freq_frames.append(selection_frequency_table(path_df, path_name=path_name))
-
-    details = pd.concat(detail_frames, ignore_index=True)
-    metrics = pd.concat(metric_frames, ignore_index=True).sort_values("rmse").reset_index(drop=True)
-    freqs = pd.concat(freq_frames, ignore_index=True)
-    return details, metrics, freqs
-
-
-def plot_validation_forecasts(validation_df: pd.DataFrame, model_name: str, output_file: Path) -> None:
-    fig, ax = plt.subplots(figsize=(10, 5))
-    ax.plot(validation_df["year"], validation_df["actual"], marker="o", label="Actual")
-    ax.plot(validation_df["year"], validation_df["predicted"], marker="o", label="Predicted")
-    ax.set_title(f"{model_name}: validation")
-    ax.set_xlabel("Year")
-    ax.set_ylabel("d_crd_daly_rate")
-    ax.grid(True, alpha=0.3)
-    ax.legend()
-    plt.tight_layout()
-    plt.savefig(output_file, dpi=300, bbox_inches="tight")
-    plt.close()
-
 
 def _score_inner_cv_for_path(
     train_outer_df: pd.DataFrame,
