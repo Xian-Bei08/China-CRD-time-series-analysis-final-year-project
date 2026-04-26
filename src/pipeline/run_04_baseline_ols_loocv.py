@@ -26,7 +26,6 @@ from src.models.feature_selection import (
     vif_screening_path,
 )
 from src.models.validation import (
-    compare_nested_loocv_paths,
     nested_loocv_select_best_path,
     metrics_table,
     selection_frequency_table,
